@@ -1,0 +1,29 @@
+﻿@model MTGRipperServer.Models.SearchResultsModel
+
+@if (Model.LstCards.Count > 0)
+{
+    foreach(MTGRipperServer.Entities.Card card in Model.LstCards)
+    {
+    
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title cardName">
+               @card.Name           
+            </h3>
+            <div class="cardSet">
+                @card.SetName
+            </div>
+        </div>    
+        <div class="panel-body">
+            <div class="mainPrice">
+                @card.Price
+            </div>
+        </div>
+    </div>
+    
+    }
+}
+else
+{
+    <strong>No cards found. Try with other search terms.</strong>
+}
