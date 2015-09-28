@@ -13,6 +13,7 @@ $(document).ready(function () {
             var spinner = new Spinner(opts).spin();
             $("#spinnerZone").html(spinner.el);
             $("#mainContent").hide();
+            $("#inputSearch").trigger("blur");
 
             var searchTermsInput = encodeURIComponent($("#inputSearch").val());
             var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
