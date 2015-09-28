@@ -1,0 +1,49 @@
+﻿body
+{
+}
+
+#loginFormDiv
+{
+    width: 400px;
+    margin: 50px auto auto auto;
+}
+
+.form-group
+{
+    width: 378px;
+    padding-left: 14px;
+}
+
+#wellForm
+{
+    min-height: 150px;
+}
+
+#mainContent
+{
+    width: 1000px;
+    margin: 100px auto auto auto;
+    padding: 25px;
+}
+
+#spinnerZone
+{
+
+}
+
+.mainPrice
+{
+    font-size: 50px;
+}
+
+.cardName
+{
+    font-size: 30px !important;
+    font-weight: bold;
+}
+
+.cardSet
+{
+    font-size: 17px;
+    font-weight: normal;
+}
