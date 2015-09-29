@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace MTGRipperServer.Entities
@@ -55,6 +56,28 @@ namespace MTGRipperServer.Entities
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ManaStringClass
+        {
+            //TODO: Support mana cost images
+            get
+            {
+                return ManaCost;
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MTGPriceURL
+        {
+            //TODO: Support mana cost images
+            get
+            {
+                return "http://www.mtgprice.com" + URL;
+            }
+        }
     }
 }

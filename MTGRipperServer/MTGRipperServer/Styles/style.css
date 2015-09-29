@@ -45,6 +45,12 @@
     font-weight: normal;
 }
 
+.cardManaCost
+{
+    display: none;
+    float: right;
+}
+
 /* Rarity colors */
 .rarityC
 {

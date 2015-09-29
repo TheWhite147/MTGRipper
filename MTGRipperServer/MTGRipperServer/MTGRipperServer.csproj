@@ -122,7 +122,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="fonts\mana.svg" />
+    <Content Include="fonts\mplantin.svg" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\mana.eot" />
+    <Content Include="fonts\mana.ttf" />
+    <Content Include="fonts\mana.woff" />
+    <Content Include="fonts\mana.woff2" />
+    <Content Include="fonts\mplantin.eot" />
+    <Content Include="fonts\mplantin.ttf" />
+    <Content Include="fonts\mplantin.woff" />
     <None Include="Properties\PublishProfiles\MTGRipper.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -130,6 +139,7 @@
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\spin.js" />
     <Content Include="Styles\bootstrap.css" />
+    <Content Include="Styles\mana.min.css" />
     <Content Include="Styles\style.css" />
     <Content Include="Styles\style_mobile.css" />
     <Content Include="Web.config" />
