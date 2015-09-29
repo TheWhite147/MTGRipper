@@ -131,6 +131,7 @@
     <Content Include="Scripts\spin.js" />
     <Content Include="Styles\bootstrap.css" />
     <Content Include="Styles\style.css" />
+    <Content Include="Styles\style_mobile.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

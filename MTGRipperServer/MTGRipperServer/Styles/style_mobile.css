@@ -1,0 +1,20 @@
+﻿@media (max-width: 780px) {
+    #mainContent
+    {
+        width: 90%;
+        margin: 50px auto auto auto;
+        padding: 25px;
+    }
+
+    #searchFormDiv
+    {
+        width: 75%;
+        margin: 50px auto auto auto;
+    }
+
+    .form-group
+    {
+        width: 100%;
+        padding-left: 14px;
+    }
+}

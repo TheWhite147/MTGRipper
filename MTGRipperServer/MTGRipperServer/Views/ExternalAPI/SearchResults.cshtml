@@ -15,6 +15,9 @@
             </div>
         </div>    
         <div class="panel-body">
+            <div class="cardRarity @Html.Raw("rarity" + card.Rarity)">
+                @card.RarityString
+            </div>
             <div class="mainPrice">
                 @card.Price $
             </div>

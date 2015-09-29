@@ -22,28 +22,6 @@
     padding-left: 14px;
 }
 
-@media (max-width: 780px) {
-    #mainContent
-    {
-        width: 90%;
-        margin: 50px auto auto auto;
-        padding: 25px;
-    }
-
-    #searchFormDiv
-    {
-        width: 75%;
-        margin: 50px auto auto auto;
-    }
-
-    .form-group
-    {
-        width: 100%;
-        padding-left: 14px;
-    }
-}
-
-
 #wellForm
 {
     min-height: 150px;
@@ -65,4 +43,25 @@
 {
     font-size: 17px;
     font-weight: normal;
+}
+
+/* Rarity colors */
+.rarityC
+{
+    color: #000000;
+}
+
+.rarityU
+{
+    color: #808080;
+}
+
+.rarityR
+{
+    color: #FFB300;
+}
+
+.rarityM
+{
+    color: #FF6600;
 }

@@ -31,5 +31,30 @@ namespace MTGRipperServer.Entities
 
         [JsonProperty("fullImageUrl")]
         public string ImageURL { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RarityString
+        {
+            get
+            {
+                switch(Rarity)
+                {                    
+                    case "C":
+                        return "Common";
+                    case "U":
+                        return "Uncommon";
+                    case "R":
+                        return "Rare";
+                    case "M":
+                        return "Mythic Rare";
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+
     }
 }
