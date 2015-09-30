@@ -71,3 +71,20 @@
 {
     color: #FF6600;
 }
+
+/* Image styles */
+.cardImage
+{
+    float: right;
+    text-align: right;
+}
+
+.imageLink
+{
+}
+
+.imageContent img
+{
+    width: 280px;
+    margin-top: 10px;
+}
