@@ -81,5 +81,24 @@ namespace MTGRipperServer.Entities
                 return "http://www.mtgprice.com" + URL;
             }
         }
+
+        public string PriceString
+        {
+            get
+            {
+                string actualPrice = Price;
+                string[] parts = actualPrice.Split('.');
+
+                if (parts.Length == 2)
+                {
+                    if (parts[1].Length == 1)
+                    {
+                        return actualPrice + "0 $";
+                    }
+                }
+
+                return actualPrice + " $";
+            }
+        }
     }
 }
