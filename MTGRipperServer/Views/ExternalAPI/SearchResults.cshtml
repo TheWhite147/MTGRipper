@@ -18,12 +18,18 @@
             </div>            
         </div>    
         <div class="panel-body">
+            <div class="cardImagePartial">
+                @Html.Partial("CardImagePartial", card)
+            </div>
             <div class="cardRarity @Html.Raw("rarity" + card.Rarity)">
                 @card.RarityString
-            </div>
+            </div>           
             <div class="mainPrice">
-                @card.Price $
-            </div>
+                @card.PriceString
+            </div> 
+            <div class="cardImagePartialMobile">
+                @Html.Partial("CardImagePartial", card)
+            </div>          
         </div>
     </div>
     

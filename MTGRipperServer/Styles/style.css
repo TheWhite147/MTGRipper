@@ -5,7 +5,7 @@
 
 #mainContent
 {
-    width: 700px;
+    width: 630px;
     margin: 50px auto auto auto;
     padding: 25px;
 }
@@ -70,4 +70,38 @@
 .rarityM
 {
     color: #FF6600;
+}
+
+/* Image styles */
+.cardImagePartial
+{
+    display: block;
+}
+
+.cardImagePartialMobile
+{
+    display: none;
+}
+
+.cardImage
+{
+    float: right;
+    text-align: right;
+}
+
+.imageLink
+{
+    text-align: right;
+}
+
+.showCardBtn
+{
+    float: right;
+    width: 150px;
+}
+
+.imageContent img
+{
+    width: 280px;
+    margin-top: 10px;
 }

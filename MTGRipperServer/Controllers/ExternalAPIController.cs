@@ -40,6 +40,13 @@ namespace MTGRipperServer.Controllers
                 jsonResponse = reader.ReadToEnd();
 
                 lstCards = JsonConvert.DeserializeObject<List<Card>>(jsonResponse);
+
+                // Assign IDs to cards
+                for (int i = 0; i < lstCards.Count; i++)
+                {
+                    lstCards[i].IdResult = i + 1; // Starts at 1
+                }
+                
                 model.LstCards = lstCards;
             }
             catch(Exception ex)

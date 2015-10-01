@@ -1,0 +1,13 @@
+﻿@model MTGRipperServer.Entities.Card
+
+@if (!string.IsNullOrEmpty(Model.ImageURL))
+{
+    <div class="cardImage">
+        <div class="imageLink">
+            <div class="btn btn-success btn-xs showCardBtn" data-image-src="@Model.ImageURL" data-result-id="@Model.IdResult">Show card</div>
+        </div>
+        <div class="imageContent">
+            <img class="@Html.Raw("resultImg" + Model.IdResult)" src="" style="display:none;" />
+        </div>
+    </div>
+}

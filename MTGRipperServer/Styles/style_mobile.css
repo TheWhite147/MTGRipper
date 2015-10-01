@@ -17,4 +17,46 @@
         width: 100%;
         padding-left: 14px;
     }
+
+    /* Image styles */
+    .cardImagePartial
+    {
+        display: none;
+    }
+
+    .cardImagePartialMobile
+    {
+        display: block;
+        margin-top: 20px;   
+    }
+
+    .cardImage
+    {
+        float: none;
+        text-align: left;
+    }
+
+    .imageLink
+    {
+        text-align: left;
+    }
+
+    .showCardBtn
+    {
+        float: none;
+        width: 150px;
+    }
+
+    .imageContent img
+    {
+        width: 280px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 440px) {
+    .imageContent img
+    {
+        width: 170px;
+    }
 }
