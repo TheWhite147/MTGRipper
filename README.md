@@ -1,2 +1,2 @@
 # MTGRipper
-Application permettant de ripper les informations des cartes MTG pour un affichage plus clair et simple.
+Server application that rips MTG cards informations from the web to show them to you in a clear and simple way.
