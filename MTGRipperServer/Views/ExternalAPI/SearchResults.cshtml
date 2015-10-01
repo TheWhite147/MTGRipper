@@ -18,20 +18,18 @@
             </div>            
         </div>    
         <div class="panel-body">
-            <div class="cardImage">
-                <div class="imageLink">
-                    <div class="btn btn-primary btn-xs showCardBtn" data-image-src="@card.ImageURL">Show card</div>
-                </div>
-                <div class="imageContent">
-                    <img src="" style="display:none;" />
-                </div>
+            <div class="cardImagePartial">
+                @Html.Partial("CardImagePartial", card)
             </div>
             <div class="cardRarity @Html.Raw("rarity" + card.Rarity)">
                 @card.RarityString
             </div>           
             <div class="mainPrice">
                 @card.Price $
-            </div>           
+            </div> 
+            <div class="cardImagePartialMobile">
+                @Html.Partial("CardImagePartial", card)
+            </div>          
         </div>
     </div>
     

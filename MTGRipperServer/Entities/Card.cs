@@ -9,6 +9,8 @@ namespace MTGRipperServer.Entities
 {
     public class Card
     {
+        public int IdResult { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 

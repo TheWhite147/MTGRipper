@@ -59,28 +59,30 @@ function updateControls() {
 
     // Show card image button
     $(".showCardBtn").click(function () {
+        var idResult = $(this).data("result-id");
+        var image = $(".resultImg" + idResult);
+
         if ($(this).hasClass("imageLoaded")) {
             if ($(this).hasClass("show")) {
                 $(this).removeClass("show");
-                $(this).hide();
+                $(this).html("Show card");
+                $(image).hide();
             } else {
                 $(this).addClass("show");
-                $(this).show();
+                $(this).html("Hide card");
+                $(image).show();
             }
-            $(this).show();
-
         } else {
-
             var imageSrc = $(this).data("image-src");
             if (!imageSrc)
                 return;
 
             $(this).addClass("imageLoaded");
             $(this).addClass("show");
-            var nextImage = $(this).closest($(".imageContent")).closest("img");
-
-            $(nextImage).attr("src", imageSrc);
-            $(nextImage).show();
+            $(this).html("Hide card");
+            
+            $(image).attr("src", imageSrc);
+            $(image).show();
         }
     });
 }
