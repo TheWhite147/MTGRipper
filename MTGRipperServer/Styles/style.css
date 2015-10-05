@@ -45,6 +45,12 @@
     font-weight: normal;
 }
 
+.cardSet a, .cardSet a:hover, .cardSet a:active, .cardSet a:focus
+{
+    color: #FFF;
+}
+
+
 .cardManaCost
 {
     display: none;

@@ -132,6 +132,7 @@
     <Content Include="fonts\mplantin.eot" />
     <Content Include="fonts\mplantin.ttf" />
     <Content Include="fonts\mplantin.woff" />
+    <None Include="Properties\PublishProfiles\marcthewhite.pubxml" />
     <None Include="Properties\PublishProfiles\MTGRipper.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />

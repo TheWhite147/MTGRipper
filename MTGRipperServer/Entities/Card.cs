@@ -9,6 +9,8 @@ namespace MTGRipperServer.Entities
 {
     public class Card
     {
+        private const string MTG_URL = "http://www.mtgprice.com";
+
         public int IdResult { get; set; }
 
         [JsonProperty("name")]
@@ -34,6 +36,9 @@ namespace MTGRipperServer.Entities
 
         [JsonProperty("fullImageUrl")]
         public string ImageURL { get; set; }
+
+        [JsonProperty("setUrl")]
+        public string SetURL { get; set; }
 
         /// <summary>
         /// 
@@ -78,10 +83,24 @@ namespace MTGRipperServer.Entities
             //TODO: Support mana cost images
             get
             {
-                return "http://www.mtgprice.com" + URL;
+                return MTG_URL + URL;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SetURLString
+        {
+            get
+            {
+                return MTG_URL + SetURL;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string PriceString
         {
             get
