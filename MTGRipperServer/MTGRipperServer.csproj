@@ -154,6 +154,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\ExternalAPI\SearchResults.cshtml" />
     <Content Include="Views\ExternalAPI\CardImagePartial.cshtml" />
+    <Content Include="Views\ExternalAPI\CardPricePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

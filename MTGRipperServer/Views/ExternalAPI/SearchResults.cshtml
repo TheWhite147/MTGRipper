@@ -24,9 +24,9 @@
             <div class="cardRarity @Html.Raw("rarity" + card.Rarity)">
                 @card.RarityString
             </div>           
-            <div class="mainPrice">
-                @card.PriceString
-            </div> 
+
+            @Html.Partial("CardPricePartial", card)
+
             <div class="cardImagePartialMobile">
                 @Html.Partial("CardImagePartial", card)
             </div>          

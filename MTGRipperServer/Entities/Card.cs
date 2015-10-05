@@ -40,6 +40,18 @@ namespace MTGRipperServer.Entities
         [JsonProperty("setUrl")]
         public string SetURL { get; set; }
 
+        [JsonProperty("absoluteChangeSinceYesterday")]
+        public string AbsoluteChangeOneDay { get; set; }
+
+        [JsonProperty("percentageChangeSinceYesterday")]
+        public string PctChangeOneDay { get; set; }
+
+        [JsonProperty("absoluteChangeSinceOneWeekAgo")]
+        public string AbsoluteChangeOneWeek { get; set; }
+
+        [JsonProperty("percentageChangeSinceOneWeekAgo")]
+        public string PctChangeOneWeek { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -118,6 +130,65 @@ namespace MTGRipperServer.Entities
 
                 return actualPrice + " $";
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OneDayChangeString
+        {
+            get
+            {
+                return GetPriceChangeString(AbsoluteChangeOneDay);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string OneWeekChangeString
+        {
+            get
+            {
+                return GetPriceChangeString(AbsoluteChangeOneWeek);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public string GetPriceChangeString(string price)
+        {
+            string priceOutput = price;
+
+            if (priceOutput == "0")
+                return "-";
+
+            if (priceOutput[0] != '-')
+                priceOutput = '+' + priceOutput;
+
+            int indexDot = priceOutput.IndexOf('.');
+
+            if (indexDot == -1)
+                return priceOutput + "$";
+
+            return priceOutput.Substring(0, indexDot + 3) + "$";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string GetPriceEvolutionClass(string price)
+        {
+            if (price == "-")
+                return string.Empty;
+
+            if (price[0] == '-')
+                return "negative";
+
+            return "positive";
         }
     }
 }

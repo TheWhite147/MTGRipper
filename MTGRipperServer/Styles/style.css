@@ -45,11 +45,20 @@
     font-weight: normal;
 }
 
+.positive
+{
+    color: #469408;
+}
+
+.negative
+{
+    color: #D9230F;
+}
+
 .cardSet a, .cardSet a:hover, .cardSet a:active, .cardSet a:focus
 {
     color: #FFF;
 }
-
 
 .cardManaCost
 {

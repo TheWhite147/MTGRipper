@@ -1,0 +1,25 @@
+﻿@model MTGRipperServer.Entities.Card
+
+<div class="mainPrice">
+    @Model.PriceString
+</div>
+
+<div class="priceEvolution">
+    @if (Model.OneDayChangeString != "-")
+    {
+        <div>
+            <span>1 day:&nbsp;</span>
+            <span class="@Model.GetPriceEvolutionClass(Model.OneDayChangeString)">@Model.OneDayChangeString</span>
+        </div>
+    }
+        
+    @if (Model.OneWeekChangeString != "-")
+    {
+        <div>
+            <span>1 week:&nbsp;</span>
+            <span class="@Model.GetPriceEvolutionClass(Model.OneWeekChangeString)">@Model.OneWeekChangeString</span>
+        </div>
+    }
+</div>
+
+
