@@ -25,6 +25,14 @@
 #wellForm
 {
     min-height: 150px;
+    margin-bottom: 0px;
+}
+
+#dataSourceCredits
+{
+    font-size: 10px;
+    text-align: right;
+    color: #BBB;
 }
 
 /* Card information */
