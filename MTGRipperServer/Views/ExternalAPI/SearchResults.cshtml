@@ -2,9 +2,11 @@
 
 @if (Model.LstCards.Count > 0)
 {
-    foreach(MTGRipperServer.Entities.Card card in Model.LstCards)
+    <div class="label label-info" id="infoResults">@Html.Raw(Model.LstCards.Count + " cards found")</div>
+
+    foreach (MTGRipperServer.Entities.Card card in Model.LstCards)
     {
-    
+
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="cardManaCost">
@@ -39,3 +41,10 @@ else
 {
     <strong>No cards found. Try with other search terms.</strong>
 }
+
+
+<div id="infoStatsPerf">
+    <div>API&nbsp;response&nbsp;time:&nbsp;@Html.Raw(Model.APIResponseTime + " ms")</div>
+    <div>Server&nbsp;processing&nbsp;time:&nbsp;@Html.Raw(Model.LocalResponseTime + " ms")</div>
+    <div><strong>Total:&nbsp;@Html.Raw(Model.TotalResponseTime + " ms")</strong></div>
+</div>

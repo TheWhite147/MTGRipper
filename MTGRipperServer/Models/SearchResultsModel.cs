@@ -9,5 +9,16 @@ namespace MTGRipperServer.Models
     public class SearchResultsModel
     {
         public List<Card> LstCards { get; set; }
+
+        public long TotalResponseTime { get; set; }
+        public long APIResponseTime { get; set; }
+
+        public long LocalResponseTime
+        {
+            get
+            {
+                return TotalResponseTime - APIResponseTime;
+            }
+        }
     }
 }

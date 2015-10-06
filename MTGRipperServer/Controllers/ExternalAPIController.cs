@@ -3,6 +3,7 @@ using MTGRipperServer.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,7 +22,11 @@ namespace MTGRipperServer.Controllers
         // GET: /ExternalAPI/
         [HttpGet]
         public ActionResult SearchResults(string searchTerms)
-        {           
+        {
+            Stopwatch totalTimer = new Stopwatch();
+            Stopwatch apiTimer = new Stopwatch();
+            totalTimer.Start();
+
             SearchResultsModel model = new SearchResultsModel();
             string jsonResponse = string.Empty;
             List<Card> lstCards = new List<Card>();
@@ -34,7 +39,10 @@ namespace MTGRipperServer.Controllers
                 var request = WebRequest.Create(urlOutput) as HttpWebRequest;
                 request.Host = "www.mtgprice.com";
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
+
+                apiTimer.Start();
                 WebResponse response = request.GetResponse();
+                apiTimer.Stop();
 
                 StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
                 jsonResponse = reader.ReadToEnd();
@@ -48,6 +56,10 @@ namespace MTGRipperServer.Controllers
                 }
                 
                 model.LstCards = lstCards;
+                totalTimer.Stop();
+
+                model.APIResponseTime = apiTimer.ElapsedMilliseconds;
+                model.TotalResponseTime = totalTimer.ElapsedMilliseconds;
             }
             catch(Exception ex)
             {
