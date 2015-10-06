@@ -18,7 +18,7 @@ $(document).ready(function () {
             var searchTermsInput = encodeURIComponent($("#inputSearch").val());
             var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
 
-            var request = $.post(urlSearch, function (data) {
+            var request = $.get(urlSearch, function (data) {
                 $("#spinnerZone").html("");
                 $("#mainContent").show();
 

@@ -31,11 +31,12 @@
 #inputSearch
 {
     display: table-cell;
-    width: 80%;
+    width: 79%;
 }
 
 #submitSearch
 {
+    width: 19%;
     display: table-cell;
     vertical-align: initial;
 }

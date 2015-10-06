@@ -19,7 +19,7 @@ namespace MTGRipperServer.Controllers
 
         //
         // GET: /ExternalAPI/
-        [HttpPost]
+        [HttpGet]
         public ActionResult SearchResults(string searchTerms)
         {           
             SearchResultsModel model = new SearchResultsModel();

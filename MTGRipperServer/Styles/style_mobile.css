@@ -18,9 +18,16 @@
         padding-left: 14px;
     }
 
-    #inputSearch
+   #inputSearch
     {
-        width: 60%;
+        width: 64%;
+    }
+
+    #submitSearch
+    {
+        width: 34%;
+        display: table-cell;
+        vertical-align: initial;
     }
 
     /* Image styles */
