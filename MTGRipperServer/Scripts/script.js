@@ -41,7 +41,10 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
-  
+
+    $("#inputSearch").focus(function () {
+        $("#inputSearch").val("");
+    });  
 
     // Form validation
     function isFormValid() {
