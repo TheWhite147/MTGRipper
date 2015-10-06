@@ -18,6 +18,11 @@
         padding-left: 14px;
     }
 
+    #inputSearch
+    {
+        width: 60%;
+    }
+
     /* Image styles */
     .cardImagePartial
     {

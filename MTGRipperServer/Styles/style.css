@@ -28,6 +28,18 @@
     margin-bottom: 0px;
 }
 
+#inputSearch
+{
+    display: table-cell;
+    width: 80%;
+}
+
+#submitSearch
+{
+    display: table-cell;
+    vertical-align: initial;
+}
+
 #dataSourceCredits
 {
     font-size: 10px;
