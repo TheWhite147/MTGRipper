@@ -1,4 +1,8 @@
 // JavaScript source code
+
+var _actualCurrency = "USD";
+var _usdValue = -1;
+
 $(document).ready(function () {
 
     // Set focus on search box
@@ -24,7 +28,7 @@ $(document).ready(function () {
 
                 $("#mainContent").html(data);
                 updateControls();
-
+                
             })
             .done(function () {
                 //alert("second success");
@@ -35,7 +39,6 @@ $(document).ready(function () {
                 $("#mainContent").html("<strong>ERROR</strong>");
             })
             .always(function () {
-                // Marche pas?
             });
 
             event.preventDefault();
@@ -44,7 +47,11 @@ $(document).ready(function () {
 
     $("#inputSearch").focus(function () {
         $("#inputSearch").val("");
-    });  
+    });
+
+    $(".btnCurrency").click(function () {
+        toggleCurrency();
+    });
 
     // Form validation
     function isFormValid() {
@@ -55,6 +62,7 @@ $(document).ready(function () {
     }
 
     updateControls();
+    updateCurrency();
 
 });
 
@@ -90,3 +98,76 @@ function updateControls() {
     });
 }
 
+function updateCurrency() {
+    if (_usdValue === -1) {
+        // We must update currency
+        $(".btnCurrency").addClass("disabled");
+        $("#currencyStatus").html("Updating currency...");
+
+        // Success
+        setTimeout(function () {
+            _usdValue = 1.12;
+            $("#btnCAD").removeClass("disabled");
+            $("#currencyStatus").html("CAD = " + _usdValue + " USD");
+        }, 1000);
+
+        // Fail
+        //setTimeout(function () {
+        //    $("#currencyStatus").html("Currency not available");
+        //}, 1000);
+
+    }
+}
+
+function toggleCurrency() {
+    if (_usdValue === -1)
+        return;
+
+    if (_actualCurrency === "USD") {
+        // Change currency to CAD
+        $(".price").each(function () {
+            var price = cleanPriceString($(this).html());
+            var isComparer = $(this).hasClass("priceCompare");
+            price = price * _usdValue;
+            $(this).html(restorePriceString(price, isComparer));
+        });
+
+        $("#btnUSD").removeClass("disabled");
+        $("#btnCAD").addClass("disabled");
+        _actualCurrency = "CAD";
+    }
+    else {
+        // Change currency to USD
+        $(".price").each(function () {
+            $(this).html($(this).data("originalprice"));
+        });
+
+        $("#btnUSD").addClass("disabled");
+        $("#btnCAD").removeClass("disabled");
+        _actualCurrency = "USD";
+    }
+}
+
+// Price utils
+function cleanPriceString(price) {
+    var output = price.trim();
+    output = output.replace(/\$/g, '');
+    return output;
+}
+
+function restorePriceString(price, addComparer) {
+    var output = price.toFixed(2);
+    if (addComparer) {
+        if (output > 0) {
+            output = "+" + output;
+        }
+
+        if (output != 0) {
+            output = output + " $";
+        }
+    } else {
+        output = output + " $";
+    }
+    
+    return output;
+}

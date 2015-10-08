@@ -172,9 +172,12 @@ namespace MTGRipperServer.Entities
             int indexDot = priceOutput.IndexOf('.');
 
             if (indexDot == -1)
-                return priceOutput + "$";
+                return priceOutput + " $";
 
-            return priceOutput.Substring(0, indexDot + 3) + "$";
+            string parsedPrice = priceOutput.Replace('.', ',');
+            double doublePrice = Math.Round(double.Parse(parsedPrice), 2);
+
+            return doublePrice.ToString().Replace(',','.') +" $";
         }
 
         /// <summary>
