@@ -28,7 +28,8 @@ $(document).ready(function () {
 
                 $("#mainContent").html(data);
                 updateControls();
-                
+
+                setCurrency();
             })
             .done(function () {
                 //alert("second success");
@@ -50,7 +51,9 @@ $(document).ready(function () {
     });
 
     $(".btnCurrency").click(function () {
-        toggleCurrency();
+        if (!$(this).hasClass("disabled")) {
+            toggleCurrency();
+        }
     });
 
     // Form validation
@@ -122,29 +125,38 @@ function updateCurrency() {
 function toggleCurrency() {
     if (_usdValue === -1)
         return;
-
+    
     if (_actualCurrency === "USD") {
         // Change currency to CAD
+        _actualCurrency = "CAD";
+        setCurrency();       
+
+        $("#btnUSD").removeClass("disabled");
+        $("#btnCAD").addClass("disabled");        
+    }
+    else {
+        // Change currency to USD
+        _actualCurrency = "USD";
+        setCurrency();
+
+        $("#btnUSD").addClass("disabled");
+        $("#btnCAD").removeClass("disabled");
+    }
+}
+
+function setCurrency() {
+    if (_actualCurrency === "CAD") {
         $(".price").each(function () {
             var price = cleanPriceString($(this).html());
             var isComparer = $(this).hasClass("priceCompare");
             price = price * _usdValue;
             $(this).html(restorePriceString(price, isComparer));
         });
-
-        $("#btnUSD").removeClass("disabled");
-        $("#btnCAD").addClass("disabled");
-        _actualCurrency = "CAD";
     }
     else {
-        // Change currency to USD
         $(".price").each(function () {
             $(this).html($(this).data("originalprice"));
         });
-
-        $("#btnUSD").addClass("disabled");
-        $("#btnCAD").removeClass("disabled");
-        _actualCurrency = "USD";
     }
 }
 
