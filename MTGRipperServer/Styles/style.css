@@ -41,6 +41,11 @@
     vertical-align: initial;
 }
 
+#currencyStatus
+{
+    font-size: 10px;
+}
+
 #dataSourceCredits
 {
     font-size: 10px;

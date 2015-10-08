@@ -1,6 +1,6 @@
 ﻿@model MTGRipperServer.Entities.Card
 
-<div class="mainPrice">
+<div class="mainPrice price" data-originalprice="@Model.PriceString">
     @Model.PriceString
 </div>
 
@@ -9,7 +9,7 @@
     {
         <div>
             <span>1 day:&nbsp;</span>
-            <span class="@Model.GetPriceEvolutionClass(Model.OneDayChangeString)">@Model.OneDayChangeString</span>
+            <span class="priceCompare price @Model.GetPriceEvolutionClass(Model.OneDayChangeString)" data-originalprice="@Model.OneDayChangeString">@Model.OneDayChangeString</span>
         </div>
     }
         
@@ -17,7 +17,7 @@
     {
         <div>
             <span>1 week:&nbsp;</span>
-            <span class="@Model.GetPriceEvolutionClass(Model.OneWeekChangeString)">@Model.OneWeekChangeString</span>
+            <span class="priceCompare price @Model.GetPriceEvolutionClass(Model.OneWeekChangeString)" data-originalprice="@Model.OneWeekChangeString">@Model.OneWeekChangeString</span>
         </div>
     }
 </div>

@@ -1,4 +1,8 @@
 // JavaScript source code
+
+var _actualCurrency = "USD";
+var _usdValue = -1;
+
 $(document).ready(function () {
 
     // Set focus on search box
@@ -25,6 +29,7 @@ $(document).ready(function () {
                 $("#mainContent").html(data);
                 updateControls();
 
+                setCurrency();
             })
             .done(function () {
                 //alert("second success");
@@ -35,7 +40,6 @@ $(document).ready(function () {
                 $("#mainContent").html("<strong>ERROR</strong>");
             })
             .always(function () {
-                // Marche pas?
             });
 
             event.preventDefault();
@@ -44,7 +48,13 @@ $(document).ready(function () {
 
     $("#inputSearch").focus(function () {
         $("#inputSearch").val("");
-    });  
+    });
+
+    $(".btnCurrency").click(function () {
+        if (!$(this).hasClass("disabled")) {
+            toggleCurrency();
+        }
+    });
 
     // Form validation
     function isFormValid() {
@@ -55,6 +65,7 @@ $(document).ready(function () {
     }
 
     updateControls();
+    updateCurrency();
 
 });
 
@@ -90,3 +101,90 @@ function updateControls() {
     });
 }
 
+function updateCurrency() {
+    if (_usdValue === -1) {
+        // We must update currency
+        $(".btnCurrency").addClass("disabled");
+        $("#currencyStatus").html("Updating currency...");
+
+        var urlSearch = "http://" + window.location.host + "/ExternalAPI/GetCurrency";
+
+        var request = $.get(urlSearch, function (data) {
+            var dataObj = JSON.parse(data);
+            _usdValue = dataObj.rate;
+
+            $("#btnCAD").removeClass("disabled");
+            $("#currencyStatus").html("CAD = " + _usdValue.toFixed(2) + " USD");
+        })
+        .done(function () {
+            //alert("second success");
+        })
+        .fail(function () {
+            $("#currencyStatus").html("Currency not available");
+        })
+        .always(function () {
+        });
+    }
+}
+
+function toggleCurrency() {
+    if (_usdValue === -1)
+        return;
+    
+    if (_actualCurrency === "USD") {
+        // Change currency to CAD
+        _actualCurrency = "CAD";
+        setCurrency();       
+
+        $("#btnUSD").removeClass("disabled");
+        $("#btnCAD").addClass("disabled");        
+    }
+    else {
+        // Change currency to USD
+        _actualCurrency = "USD";
+        setCurrency();
+
+        $("#btnUSD").addClass("disabled");
+        $("#btnCAD").removeClass("disabled");
+    }
+}
+
+function setCurrency() {
+    if (_actualCurrency === "CAD") {
+        $(".price").each(function () {
+            var price = cleanPriceString($(this).html());
+            var isComparer = $(this).hasClass("priceCompare");
+            price = price * _usdValue;
+            $(this).html(restorePriceString(price, isComparer));
+        });
+    }
+    else {
+        $(".price").each(function () {
+            $(this).html($(this).data("originalprice"));
+        });
+    }
+}
+
+// Price utils
+function cleanPriceString(price) {
+    var output = price.trim();
+    output = output.replace(/\$/g, '');
+    return output;
+}
+
+function restorePriceString(price, addComparer) {
+    var output = price.toFixed(2);
+    if (addComparer) {
+        if (output > 0) {
+            output = "+" + output;
+        }
+
+        if (output != 0) {
+            output = output + " $";
+        }
+    } else {
+        output = output + " $";
+    }
+    
+    return output;
+}
