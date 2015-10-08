@@ -107,18 +107,23 @@ function updateCurrency() {
         $(".btnCurrency").addClass("disabled");
         $("#currencyStatus").html("Updating currency...");
 
-        // Success
-        setTimeout(function () {
-            _usdValue = 1.12;
+        var urlSearch = "http://" + window.location.host + "/ExternalAPI/GetCurrency";
+
+        var request = $.get(urlSearch, function (data) {
+            var dataObj = JSON.parse(data);
+            _usdValue = dataObj.rate;
+
             $("#btnCAD").removeClass("disabled");
-            $("#currencyStatus").html("CAD = " + _usdValue + " USD");
-        }, 1000);
-
-        // Fail
-        //setTimeout(function () {
-        //    $("#currencyStatus").html("Currency not available");
-        //}, 1000);
-
+            $("#currencyStatus").html("CAD = " + _usdValue.toFixed(2) + " USD");
+        })
+        .done(function () {
+            //alert("second success");
+        })
+        .fail(function () {
+            $("#currencyStatus").html("Currency not available");
+        })
+        .always(function () {
+        });
     }
 }
 
