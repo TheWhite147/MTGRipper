@@ -114,7 +114,7 @@ function updateCurrency() {
             _usdValue = dataObj.rate;
 
             $("#btnCAD").removeClass("disabled");
-            $("#currencyStatus").html("CAD = " + _usdValue.toFixed(2) + " USD");
+            $("#currencyStatus").html("USD = " + _usdValue.toFixed(2) + " CAD");
         })
         .done(function () {
             //alert("second success");
