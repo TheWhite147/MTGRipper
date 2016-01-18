@@ -107,6 +107,11 @@
 }
 
 /* Rarity colors */
+.cardRarity
+{
+    font-weight: bold;
+}
+
 .rarityC
 {
     color: #000000;

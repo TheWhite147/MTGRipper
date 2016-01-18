@@ -24,10 +24,12 @@
                 @Html.Partial("CardImagePartial", card)
             </div>
             <div class="cardRarity @Html.Raw("rarity" + card.Rarity)">
-                @card.RarityString
+                @card.RarityString                
             </div>           
 
-            @Html.Partial("CardPricePartial", card)
+            <div class="mainPrice price" data-originalprice="@card.PriceString">
+                @card.PriceString
+            </div>
 
             <div class="cardImagePartialMobile">
                 @Html.Partial("CardImagePartial", card)
