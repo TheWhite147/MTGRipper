@@ -15,9 +15,19 @@
                 </div>
             </fieldset>
         </form>
-        <span id="btnUSD" data-currency="USD" class="btn btn-info btn-xs btnCurrency">USD</span>
-        <span id="btnCAD" data-currency="CAD" class="btn btn-primary btn-xs btnCurrency">CAD</span>
-        <div id="currencyStatus"></div>
+        <div id="modeChange">
+            <div class="searchOption">Set data source</div>
+            <span id="btnMtgPrice" data-mode="mtgprice" class="btn btn-success btn-xs btnMode">MTG Price</span>
+            <span id="btnMtlStores" data-mode="mtlstores" class="btn btn-danger btn-xs btnMode">MTL Stores</span>
+        </div>
+
+        <div id="currencyChange">
+            <div class="searchOption">Set currency</div>
+            <span id="btnUSD" data-currency="USD" class="btn btn-info btn-xs btnCurrency">USD</span>
+            <span id="btnCAD" data-currency="CAD" class="btn btn-primary btn-xs btnCurrency">CAD</span>
+            <div id="currencyStatus"></div>
+        </div>
+
     </div>
     <div id="dataSourceCredits">
         MTG Price data provided by: <a href="http://www.mtgprice.com">MTGPrice.com</a>

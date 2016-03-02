@@ -53,6 +53,16 @@
     color: #BBB;
 }
 
+#modeChange
+{
+    margin-bottom: 10px;
+}
+
+.searchOption
+{
+    font-size: 10px;
+}
+
 #infoResults
 {
     margin-bottom: 22px;

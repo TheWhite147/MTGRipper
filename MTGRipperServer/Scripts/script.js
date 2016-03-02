@@ -2,6 +2,7 @@
 
 var _actualCurrency = "USD";
 var _usdValue = -1;
+var _actualMode = "mtgprice";
 
 $(document).ready(function () {
 
@@ -56,6 +57,12 @@ $(document).ready(function () {
         }
     });
 
+    $(".btnMode").click(function () {
+        if (!$(this).hasClass("disabled")) {
+            toggleMode();
+        }
+    });
+
     // Form validation
     function isFormValid() {
         if ($("#inputSearch").val() == "")
@@ -66,6 +73,7 @@ $(document).ready(function () {
 
     updateControls();
     updateCurrency();
+    updateMode();
 
 });
 
@@ -101,6 +109,8 @@ function updateControls() {
     });
 }
 
+
+// Currency stuff
 function updateCurrency() {
     if (_usdValue === -1) {
         // We must update currency
@@ -162,6 +172,44 @@ function setCurrency() {
         $(".price").each(function () {
             $(this).html($(this).data("originalprice"));
         });
+    }
+}
+
+// Mode stuff
+function updateMode() {
+    if (_actualMode === "mtgprice") {
+        $("#btnMtgPrice").addClass("disabled");
+        $("#btnMtlStores").removeClass("disabled");
+
+        // Show currency change options
+        $("#currencyChange").show();
+        
+        // Show data source credits
+        $("#dataSourceCredits").show();
+    }
+    else {
+        $("#btnMtgPrice").removeClass("disabled");
+        $("#btnMtlStores").addClass("disabled");
+
+        // Hide currency change options
+        $("#currencyChange").hide();
+
+        // hdie data source credits
+        $("#dataSourceCredits").hide();
+    }
+}
+
+function toggleMode() {   
+    if (_actualMode === "mtgprice") {
+        // Change mode to MTL Stores
+        _actualMode = "mtlstores";
+        updateMode();
+     
+    }
+    else {
+        // Change mode to MTG Price
+        _actualMode = "mtgprice";
+        updateMode();
     }
 }
 
