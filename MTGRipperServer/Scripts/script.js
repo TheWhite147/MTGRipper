@@ -21,27 +21,54 @@ $(document).ready(function () {
             $("#inputSearch").trigger("blur");
 
             var searchTermsInput = encodeURIComponent($("#inputSearch").val());
-            var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
 
-            var request = $.get(urlSearch, function (data) {
-                $("#spinnerZone").html("");
-                $("#mainContent").show();
+            if (_actualMode === "mtgprice") {
+                var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
 
-                $("#mainContent").html(data);
-                updateControls();
+                var request = $.get(urlSearch, function (data) {
+                    $("#spinnerZone").html("");
+                    $("#mainContent").show();
 
-                setCurrency();
-            })
-            .done(function () {
-                //alert("second success");
-            })
-            .fail(function () {
-                $("#spinnerZone").html("");
-                $("#mainContent").show();
-                $("#mainContent").html("<strong>ERROR</strong>");
-            })
-            .always(function () {
-            });
+                    $("#mainContent").html(data);
+                    updateControls();
+
+                    setCurrency();
+                })
+                .done(function () {
+                    //alert("second success");
+                })
+                .fail(function () {
+                    $("#spinnerZone").html("");
+                    $("#mainContent").show();
+                    $("#mainContent").html("<strong>ERROR</strong>");
+                })
+                .always(function () {
+                });
+            }
+            else {
+                var urlSearch = "http://" + window.location.host + "/ExternalAPI/TemplateCardInfo?searchTerms=" + searchTermsInput;
+
+                var request = $.get(urlSearch, function (data) {
+                    $("#spinnerZone").html("");
+                    $("#mainContent").show();
+                    $("#mainContent").html(data);
+
+                    RipPriceTKL(searchTermsInput);
+                    RipPriceGK(searchTermsInput);
+                    RipPriceF2F(searchTermsInput);
+
+                })
+                .done(function () {
+                    //alert("second success");
+                })
+                .fail(function () {
+                    $("#spinnerZone").html("");
+                    $("#mainContent").show();
+                    $("#mainContent").html("<strong>ERROR</strong>");
+                })
+                .always(function () {
+                });
+            }
 
             event.preventDefault();
         }
@@ -235,4 +262,29 @@ function restorePriceString(price, addComparer) {
     }
     
     return output;
+}
+
+// Ripping methods
+function RipPriceTKL(searchTermsInput) {
+    var urlSearch = "http://" + window.location.host + "/ExternalAPI/GetPrice3KL?searchTerms=" + searchTermsInput;
+
+    var request = $.get(urlSearch, function (data) {
+        $("#priceTKL").html(data);
+    })
+    .done(function () {
+        //alert("second success");
+    })
+    .fail(function () {
+        $("#priceTKL").html("ERROR");
+    })
+    .always(function () {
+    });
+}
+
+function RipPriceGK(searchTermsInput) {
+
+}
+
+function RipPriceF2F(searchTermsInput) {
+
 }

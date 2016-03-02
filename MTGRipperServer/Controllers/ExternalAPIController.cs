@@ -1,4 +1,5 @@
 ﻿using MTGRipperServer.Entities;
+using MTGRipperServer.Helpers;
 using MTGRipperServer.Models;
 using Newtonsoft.Json;
 using System;
@@ -18,8 +19,10 @@ namespace MTGRipperServer.Controllers
         private static string PRICE_API_URL = "http://www.mtgprice.com/cardNameSearch?name=";
         private static string CURRENCY_API_URL = "http://currency-api.appspot.com/api/USD/CAD.jsonp?amount=1.00&callback=USDRate";
 
-        private static string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
+        private static string TKL_SEARCH_URL = "http://www.threekingsloot.com/products/search?q=";
         
+        private static string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
+
         //
         // GET: /ExternalAPI/
         [HttpGet]
@@ -40,7 +43,7 @@ namespace MTGRipperServer.Controllers
 
                 var request = WebRequest.Create(urlOutput) as HttpWebRequest;
                 request.Host = "www.mtgprice.com";
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
+                request.UserAgent = USER_AGENT;
 
                 apiTimer.Start();
                 WebResponse response = request.GetResponse();
@@ -69,6 +72,47 @@ namespace MTGRipperServer.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult TemplateCardInfo(string searchTerms)
+        {
+            MultiStoresCardModel model = new MultiStoresCardModel();
+            model.Name = searchTerms;
+
+            return View(model);
+        }
+
+        //
+        // GET: /ExternalAPI/
+        [HttpGet]
+        public ContentResult GetPrice3KL(string searchTerms)
+        {
+            string htmlContent = string.Empty;
+            string price = string.Empty;
+
+            try
+            {
+                searchTerms = searchTerms.Replace(' ', '+');
+                string urlOutput = TKL_SEARCH_URL + searchTerms;
+
+                var request = WebRequest.Create(urlOutput) as HttpWebRequest;
+                request.Host = "www.threekingsloot.com";
+                request.UserAgent = USER_AGENT;
+
+                WebResponse response = request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                htmlContent = reader.ReadToEnd();
+
+                price = HtmlParser.ParsePrice3KL(htmlContent);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpException(500, ex.Message);
+            }
+
+            return Content(price);
         }
 
         //

@@ -116,6 +116,17 @@
     float: right;
 }
 
+#storesPrices
+{
+    font-size: 22px;
+}
+
+.badge
+{
+    font-size: 19px !important;
+    padding: 7px !important;
+}
+
 /* Rarity colors */
 .cardRarity
 {

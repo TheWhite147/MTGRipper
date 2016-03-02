@@ -111,10 +111,12 @@
   <ItemGroup>
     <Compile Include="Controllers\ExternalAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\MultiStoresCardModel.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlParser.cs" />
     <Compile Include="Models\SearchResultsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,6 +156,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\ExternalAPI\SearchResults.cshtml" />
     <Content Include="Views\ExternalAPI\CardImagePartial.cshtml" />
+    <Content Include="Views\ExternalAPI\TemplateCardInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
