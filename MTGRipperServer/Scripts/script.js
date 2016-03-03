@@ -2,7 +2,6 @@
 
 var _actualCurrency = "USD";
 var _usdValue = -1;
-var _actualMode = "mtgprice";
 
 $(document).ready(function () {
 
@@ -21,54 +20,28 @@ $(document).ready(function () {
             $("#inputSearch").trigger("blur");
 
             var searchTermsInput = encodeURIComponent($("#inputSearch").val());
+            
+            var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
 
-            if (_actualMode === "mtgprice") {
-                var urlSearch = "http://" + window.location.host + "/ExternalAPI/SearchResults?searchTerms=" + searchTermsInput;
+            var request = $.get(urlSearch, function (data) {
+                $("#spinnerZone").html("");
+                $("#mainContent").show();
 
-                var request = $.get(urlSearch, function (data) {
-                    $("#spinnerZone").html("");
-                    $("#mainContent").show();
+                $("#mainContent").html(data);
+                updateControls();
 
-                    $("#mainContent").html(data);
-                    updateControls();
-
-                    setCurrency();
-                })
-                .done(function () {
-                    //alert("second success");
-                })
-                .fail(function () {
-                    $("#spinnerZone").html("");
-                    $("#mainContent").show();
-                    $("#mainContent").html("<strong>ERROR</strong>");
-                })
-                .always(function () {
-                });
-            }
-            else {
-                var urlSearch = "http://" + window.location.host + "/ExternalAPI/TemplateCardInfo?searchTerms=" + searchTermsInput;
-
-                var request = $.get(urlSearch, function (data) {
-                    $("#spinnerZone").html("");
-                    $("#mainContent").show();
-                    $("#mainContent").html(data);
-
-                    RipPriceTKL(searchTermsInput);
-                    RipPriceGK(searchTermsInput);
-                    RipPriceF2F(searchTermsInput);
-
-                })
-                .done(function () {
-                    //alert("second success");
-                })
-                .fail(function () {
-                    $("#spinnerZone").html("");
-                    $("#mainContent").show();
-                    $("#mainContent").html("<strong>ERROR</strong>");
-                })
-                .always(function () {
-                });
-            }
+                setCurrency();
+            })
+            .done(function () {
+                //alert("second success");
+            })
+            .fail(function () {
+                $("#spinnerZone").html("");
+                $("#mainContent").show();
+                $("#mainContent").html("<strong>ERROR</strong>");
+            })
+            .always(function () {
+            });
 
             event.preventDefault();
         }
@@ -82,13 +55,7 @@ $(document).ready(function () {
         if (!$(this).hasClass("disabled")) {
             toggleCurrency();
         }
-    });
-
-    $(".btnMode").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            toggleMode();
-        }
-    });
+    });    
 
     // Form validation
     function isFormValid() {
@@ -100,11 +67,12 @@ $(document).ready(function () {
 
     updateControls();
     updateCurrency();
-    updateMode();
 
 });
 
 function updateControls() {
+
+    $(".priceContent").hide();
 
     // Show card image button
     $(".showCardBtn").click(function () {
@@ -134,8 +102,33 @@ function updateControls() {
             $(image).show();
         }
     });
-}
 
+    // Show Montreal Stores Prices
+    $(".showMontrealStoresBtn").click(function () {
+        var idResult = $(this).data("result-id");
+        var priceContent = $("#priceContent" + idResult);
+        var cardName = $(this).data("card-name");
+
+        if ($(this).hasClass("priceLoaded")) {
+            if ($(this).hasClass("showPrices")) {
+                $(this).removeClass("showPrices");
+                $(this).html("Show MTL Stores Prices");
+                $(priceContent).hide();
+            } else {
+                $(this).addClass("showPrices");
+                $(this).html("Hide MTL Stores Prices");
+                $(priceContent).show();
+            }
+        } else {           
+            $(this).addClass("priceLoaded");
+            $(this).addClass("showPrices");
+            $(this).html("Hide MTL Stores Prices");
+            $(priceContent).show();
+
+            RipPriceTKL(cardName, $("#price3KL" + idResult));
+        }
+    });
+}
 
 // Currency stuff
 function updateCurrency() {
@@ -202,44 +195,6 @@ function setCurrency() {
     }
 }
 
-// Mode stuff
-function updateMode() {
-    if (_actualMode === "mtgprice") {
-        $("#btnMtgPrice").addClass("disabled");
-        $("#btnMtlStores").removeClass("disabled");
-
-        // Show currency change options
-        $("#currencyChange").show();
-        
-        // Show data source credits
-        $("#dataSourceCredits").show();
-    }
-    else {
-        $("#btnMtgPrice").removeClass("disabled");
-        $("#btnMtlStores").addClass("disabled");
-
-        // Hide currency change options
-        $("#currencyChange").hide();
-
-        // hdie data source credits
-        $("#dataSourceCredits").hide();
-    }
-}
-
-function toggleMode() {   
-    if (_actualMode === "mtgprice") {
-        // Change mode to MTL Stores
-        _actualMode = "mtlstores";
-        updateMode();
-     
-    }
-    else {
-        // Change mode to MTG Price
-        _actualMode = "mtgprice";
-        updateMode();
-    }
-}
-
 // Price utils
 function cleanPriceString(price) {
     var output = price.trim();
@@ -265,17 +220,17 @@ function restorePriceString(price, addComparer) {
 }
 
 // Ripping methods
-function RipPriceTKL(searchTermsInput) {
+function RipPriceTKL(searchTermsInput, priceElement) {
     var urlSearch = "http://" + window.location.host + "/ExternalAPI/GetPrice3KL?searchTerms=" + searchTermsInput;
 
     var request = $.get(urlSearch, function (data) {
-        $("#priceTKL").html(data);
+        $(priceElement).html(data);
     })
     .done(function () {
         //alert("second success");
     })
     .fail(function () {
-        $("#priceTKL").html("ERROR");
+        $(priceElement).html("ERROR");
     })
     .always(function () {
     });

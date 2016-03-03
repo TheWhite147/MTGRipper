@@ -29,7 +29,7 @@ namespace MTGRipperServer.Helpers
             if (string.IsNullOrEmpty(price))
                 price = "N/A";
             else
-                price = price + "$";
+                price = price + " CAD";
 
             return price;
         }

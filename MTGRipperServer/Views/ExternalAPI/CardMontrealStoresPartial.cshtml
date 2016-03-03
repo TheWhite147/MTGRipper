@@ -1,0 +1,23 @@
+﻿@model MTGRipperServer.Entities.Card
+
+<div class="cardMontrealStores">
+    <div class="storesLink">
+        <div class="btn btn-danger btn-xs showMontrealStoresBtn" data-card-name="@Model.Name" data-result-id="@Model.IdResult">Show MTL Stores Prices</div>
+    </div>
+    <div id="@Html.Raw("priceContent" + Model.IdResult)" class="priceContent">
+        <table>
+            <tr>
+                <td><strong>3KL&nbsp;&nbsp;</strong></td>
+                <td><span id="@Html.Raw("price3KL" + Model.IdResult)" class="priceCad">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><strong>GK&nbsp;&nbsp;&nbsp;</strong></td>
+                <td><span id="@Html.Raw("priceGK" + Model.IdResult)" class="priceCad">N/A</span></td>
+            </tr>
+            <tr>
+                <td><strong>F2F&nbsp;&nbsp;</strong></td>
+                <td><span id="@Html.Raw("priceF2F" + Model.IdResult)" class="priceCad">N/A</span></td>
+            </tr>
+        </table>
+    </div>
+</div>

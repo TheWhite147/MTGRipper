@@ -72,16 +72,7 @@ namespace MTGRipperServer.Controllers
             }
 
             return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult TemplateCardInfo(string searchTerms)
-        {
-            MultiStoresCardModel model = new MultiStoresCardModel();
-            model.Name = searchTerms;
-
-            return View(model);
-        }
+        }       
 
         //
         // GET: /ExternalAPI/

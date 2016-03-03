@@ -111,7 +111,6 @@
   <ItemGroup>
     <Compile Include="Controllers\ExternalAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\MultiStoresCardModel.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,7 +155,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\ExternalAPI\SearchResults.cshtml" />
     <Content Include="Views\ExternalAPI\CardImagePartial.cshtml" />
-    <Content Include="Views\ExternalAPI\TemplateCardInfo.cshtml" />
+    <Content Include="Views\ExternalAPI\CardMontrealStoresPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -184,7 +183,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1687</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
