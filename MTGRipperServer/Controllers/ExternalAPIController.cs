@@ -20,6 +20,7 @@ namespace MTGRipperServer.Controllers
         private static string CURRENCY_API_URL = "http://currency-api.appspot.com/api/USD/CAD.jsonp?amount=1.00&callback=USDRate";
 
         private static string TKL_SEARCH_URL = "http://www.threekingsloot.com/products/search?q=";
+        private static string GK_SEARCH_URL = "http://www.gamekeeperonline.com/products/search?query={0}&x=0&y=0";
         
         private static string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
 
@@ -97,6 +98,38 @@ namespace MTGRipperServer.Controllers
                 htmlContent = reader.ReadToEnd();
 
                 price = HtmlParser.ParsePrice3KL(htmlContent);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpException(500, ex.Message);
+            }
+
+            return Content(price);
+        }
+
+        //
+        // GET: /ExternalAPI/
+        [HttpGet]
+        public ContentResult GetPriceGK(string searchTerms)
+        {
+            string htmlContent = string.Empty;
+            string price = string.Empty;
+
+            try
+            {
+                searchTerms = searchTerms.Replace(' ', '+');
+                string urlOutput = string.Format(GK_SEARCH_URL, searchTerms);
+
+                var request = WebRequest.Create(urlOutput) as HttpWebRequest;
+                request.Host = "www.gamekeeperonline.com";
+                request.UserAgent = USER_AGENT;
+
+                WebResponse response = request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                htmlContent = reader.ReadToEnd();
+
+                price = HtmlParser.ParsePriceGK(htmlContent);
             }
             catch (Exception ex)
             {

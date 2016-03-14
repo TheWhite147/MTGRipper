@@ -7,6 +7,11 @@ namespace MTGRipperServer.Helpers
 {
     public static class HtmlParser
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string ParsePrice3KL(string html)
         {
             string price = string.Empty;
@@ -29,7 +34,31 @@ namespace MTGRipperServer.Helpers
             if (string.IsNullOrEmpty(price))
                 price = "N/A";
             else
-                price = price + " CAD";
+                price = price + " CAD$";
+
+            return price;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static string ParsePriceGK(string html)
+        {
+            string price = string.Empty;
+            string spanText = "<td class=\"price\">";
+            string endSpan = "</td>";
+
+            html = html.Replace("\n", "").Replace("\t", "").Replace("\r", "");
+
+            int indexSpanText = html.IndexOf(spanText) + spanText.Length;
+            int indexEndSpan = html.IndexOf(endSpan, indexSpanText);
+
+            string rawPrice = html.Substring(indexSpanText, indexEndSpan - indexSpanText);
+            rawPrice = rawPrice.Replace("CAD$", "").Trim();
+
+            price = rawPrice + " CAD$";
 
             return price;
         }

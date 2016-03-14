@@ -125,7 +125,9 @@ function updateControls() {
             $(this).html("Hide MTL Stores Prices");
             $(priceContent).show();
 
-            RipPriceTKL(cardName, $("#price3KL" + idResult));
+            RipExternalPrice(cardName, $("#price3KL" + idResult), "GetPrice3KL");
+            RipExternalPrice(cardName, $("#priceGK" + idResult), "GetPriceGK");
+            RipExternalPrice(cardName, $("#priceF2F" + idResult), "GetPriceF2F");
         }
     });
 }
@@ -220,8 +222,8 @@ function restorePriceString(price, addComparer) {
 }
 
 // Ripping methods
-function RipPriceTKL(searchTermsInput, priceElement) {
-    var urlSearch = "http://" + window.location.host + "/ExternalAPI/GetPrice3KL?searchTerms=" + searchTermsInput;
+function RipExternalPrice(searchTermsInput, priceElement, getPriceMethodName) {
+    var urlSearch = "http://" + window.location.host + "/ExternalAPI/" + getPriceMethodName + "?searchTerms=" + searchTermsInput;
 
     var request = $.get(urlSearch, function (data) {
         $(priceElement).html(data);
